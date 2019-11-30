@@ -2,8 +2,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity, Platform } from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { CATEGORIES } from '../data/dummy-data'
 import CategoryGridTile from '../components/CategoryGridTIle'
+import HeaderButton from '../components/HeaderButton'
 
 const styles = StyleSheet.create({
   screen:{
@@ -40,9 +42,22 @@ const CategoriesScreen = (props) => {
   )
 }
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meal Categories',
-
+CategoriesScreen.navigationOptions = (navData) => {
+  const { navigation } = navData
+  const { toggleDrawer } = navigation
+  return {
+    headerTitle: 'Meal Categories',
+    headerLeft:
+  <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    <Item
+      title='Menu'
+      iconName='ios-menu'
+      onPress={() => {
+        toggleDrawer()
+      }}
+    />
+  </HeaderButtons>,
+  }
 }
 
 export default CategoriesScreen
